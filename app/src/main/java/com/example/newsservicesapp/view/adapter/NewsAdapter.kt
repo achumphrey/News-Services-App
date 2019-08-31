@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsservicesapp.R
 import com.example.newsservicesapp.common.inflate
+import com.example.newsservicesapp.common.loadImage
 import com.example.newsservicesapp.model.Articles
 import com.example.newsservicesapp.model.NewsModel
 import kotlinx.android.synthetic.main.fragment_recycler_view.view.*
@@ -26,6 +27,7 @@ class NewsAdapter (private val newsModel: NewsModel, private val listener: OnLis
 
         holder.tvTitle.text = newsModel.articles[position].title
         holder.tvDescription.text = newsModel.articles[position].description
+        holder.imgView.loadImage(newsModel.articles[position].urlToImage)
         holder.bind(newsModel.articles[position], listener)
     }
 }
@@ -40,6 +42,7 @@ class ListViewHolder (view: View): RecyclerView.ViewHolder(view){
 
     val tvTitle = view.tv_title
     val tvDescription = view.tv_description
+    val imgView = view.iv_news_logo
 }
 
 interface OnListClickLister{

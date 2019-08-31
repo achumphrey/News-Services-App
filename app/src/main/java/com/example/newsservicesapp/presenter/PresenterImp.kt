@@ -3,7 +3,6 @@ package com.example.newsservicesapp.presenter
 import android.util.Log
 import com.example.newsservicesapp.common.Constants
 import com.example.newsservicesapp.common.enqueue
-import com.example.newsservicesapp.model.NewsModel
 import com.example.newsservicesapp.network.ClientInterface
 import com.example.newsservicesapp.network.RetrofitInstance
 
@@ -26,15 +25,13 @@ class PresenterImp (_view: ViewInterface?): PresenterInterface {
                 newsModel -> val newsModelRecords = newsModel.body()
 
                 view?.onShowList(newsModelRecords!!)
-        }
+            }
             onFailure = {
-
                     error -> Log.d("Fail", error?.message)
             }
 
         }//END CALL ENQUEUE
-
-    }
+    }// END METHOD CALL
 
     override fun onDestroy() {
         view = null

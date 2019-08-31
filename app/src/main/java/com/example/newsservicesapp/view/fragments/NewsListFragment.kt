@@ -15,21 +15,17 @@ import com.example.newsservicesapp.R
 import com.example.newsservicesapp.model.Articles
 import com.example.newsservicesapp.model.NewsModel
 import com.example.newsservicesapp.presenter.PresenterImp
-import com.example.newsservicesapp.presenter.PresenterInterface
 import com.example.newsservicesapp.presenter.ViewInterface
 import com.example.newsservicesapp.view.adapter.NewsAdapter
 import com.example.newsservicesapp.view.adapter.OnListClickLister
 import kotlinx.android.synthetic.main.fragment_news_list.*
 
-/**
- * A simple [Fragment] subclass.
- */
 class NewsListFragment : Fragment(), ViewInterface {
 
     private lateinit var presenterImp: PresenterImp
 
     override fun showProgress() {
-
+        prgs_bar.visibility = View.VISIBLE
     }
 
     override fun showError() {
@@ -37,6 +33,8 @@ class NewsListFragment : Fragment(), ViewInterface {
     }
 
     override fun onShowList(newsModel: NewsModel) {
+
+        prgs_bar.visibility = View.GONE
 
         val adapter: NewsAdapter =
             NewsAdapter(
@@ -76,6 +74,7 @@ class NewsListFragment : Fragment(), ViewInterface {
 
         presenterImp = PresenterImp(this)
         presenterImp.processCall()
+        showProgress()
 
 
 
