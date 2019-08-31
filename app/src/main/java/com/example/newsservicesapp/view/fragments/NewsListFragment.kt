@@ -29,7 +29,6 @@ class NewsListFragment : Fragment(), ViewInterface {
     }
 
     override fun showError() {
-
     }
 
     override fun onShowList(newsModel: NewsModel) {
@@ -37,23 +36,19 @@ class NewsListFragment : Fragment(), ViewInterface {
         prgs_bar.visibility = View.GONE
 
         val adapter: NewsAdapter =
-            NewsAdapter(
-                newsModel!!,
-                object :
-                    OnListClickLister {
-                    override fun onListClick(articles: Articles) {
+            NewsAdapter(newsModel!!, object : OnListClickLister {
 
+                    override fun onListClick(articles: Articles) {
                         val url = articles.url
                         val builder = CustomTabsIntent.Builder()
 
                         val customTabsIntent: CustomTabsIntent = builder.build()
                         customTabsIntent.launchUrl(activity, Uri.parse(url))
-                        }
-                })
+                    }//END ONLISTCLICK METHOD
+            })//END ADAPTER INITIALIZATION
 
         rv_list.layoutManager = LinearLayoutManager(activity)
         rv_list.adapter = adapter
-
     }
 
     override fun onDestroy() { // this is the activity's onDestroy() method call
@@ -63,8 +58,7 @@ class NewsListFragment : Fragment(), ViewInterface {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_news_list, container, false)
     }
@@ -75,11 +69,5 @@ class NewsListFragment : Fragment(), ViewInterface {
         presenterImp = PresenterImp(this)
         presenterImp.processCall()
         showProgress()
-
-
-
-
     }
-
-
-}
+}//END NEWSLISTFRAGMENT CLASS
